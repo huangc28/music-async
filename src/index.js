@@ -9,6 +9,10 @@ import routes from './routes'
 const initialState = window.__INITIAL_STATE__
 const store = createStore(rootReducer, initialState)
 
+if (module.hot) {
+  module.hot.accept()
+}
+
 const App = () => (
 	<Provider store={store}>
 	  <Router routes={routes} history={browserHistory} />
