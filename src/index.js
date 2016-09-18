@@ -9,8 +9,10 @@ import routes from './routes'
 const initialState = window.__INITIAL_STATE__
 const store = createStore(rootReducer, initialState)
 
+// check if its hmr.
 if (module.hot) {
-  module.hot.accept()
+	// accept itself.
+	module.hot.accept()
 }
 
 const App = () => (
