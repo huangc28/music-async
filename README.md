@@ -11,8 +11,22 @@ I want to build a web app that helps to sync my music (download from human media
 - it really is a complicated process to have iTunes sync music among computers and iphone, I rather do a drop sync myself.
 - why not?
 
-## Tech stack:
+## Tech stack
 
 - frontend uses riot + webpack + redux + redux-saga.
-- backend uses nodes. Might progress to *golang*. IF NEEDED
+- backend uses nodes. Might progress to *Golang*. IF NEEDED
 - probably need socket.io to continuously listen to change in directory in order to renew music list. IF NEEDED!
+
+## Scheme
+
+There are three major parts in this project:
+
+1. Load music information from filesystem.
+
+2. Save music to destined location.
+
+3. Music player.
+
+## Progress
+
+[] place several sample musics in *musics* folder. try fetch *mime-data* from these files.

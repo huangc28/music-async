@@ -41,6 +41,10 @@ if (process.env.NODE_ENV === 'development') {
   }))
 }
 
+app.get('/api/getMusicList', () => {
+  
+})
+
 function handleRender (req, res) {
   match({ routes, location: req.url }, (error, redirectLocation, renderProps) => {
     if (error) {

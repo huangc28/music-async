@@ -5,8 +5,20 @@ import styles from './Home.css'
 
 const Home = () => (
 	<div className={styles.root}>
-		<Title title="this is a custom title" />
-		<img src={TestJPEG} />
+		{/* music list */}
+		<div>
+			music list group
+		</div>
+
+		{/* manipulation zone */}
+		<div>
+			<div>
+				dropzone
+			</div>
+			<div>
+				playing zone
+			</div>
+		</div>
 	</div>
 )
 
