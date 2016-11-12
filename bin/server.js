@@ -1,6 +1,6 @@
-const fs =  require('fs')
+const fs = require('fs')
 const path = require('path')
-const config =  JSON.parse(fs.readFileSync(path.resolve(__dirname, '..', '.babelrc'), 'utf-8'))
+const config = JSON.parse(fs.readFileSync(path.resolve(__dirname, '..', '.babelrc'), 'utf-8'))
 require('babel-register')(config)
 
 require('css-modules-require-hook')({
@@ -8,7 +8,7 @@ require('css-modules-require-hook')({
 })
 
 require('asset-require-hook')({
-  extensions: ['jpeg', 'jpg', 'svg']
+  extensions: ['jpeg', 'jpg', 'svg'],
 })
 
 require(path.resolve(__dirname, '../server', 'server.js'))

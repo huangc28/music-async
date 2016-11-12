@@ -1,13 +1,12 @@
 import 'babel-polyfill'
 import express from 'express'
-import { resolve, join } from 'path'
+import { resolve } from 'path'
 import React from 'react'
 import { renderToString } from 'react-dom/server'
 import { match, RouterContext } from 'react-router'
 import routes from '../src/routes'
 import { renderFullPage, staticify } from './utils/render'
 import { createStore } from 'redux'
-import { Provider }  from 'react-redux'
 import reducers from '../src/reducers'
 import webpack from 'webpack'
 import webpackDevMiddleware from 'webpack-dev-middleware'
@@ -30,7 +29,7 @@ if (process.env.NODE_ENV === 'development') {
     historyApiFallback: true,
     publicPath: webpackConfig.output.publicPath,
     stats: {
-        colors: true,
+      colors: true,
     },
   }))
 
@@ -42,13 +41,15 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 function handleRender (req, res) {
-  match({ routes, location: req.url }, (error, redirectLocation, renderProps) => {
+  match({
+    routes,
+    location: req.url,
+  }, (error, redirectLocation, renderProps) => {
     if (error) {
       res.status(500).send(error.message)
     } else if (redirectLocation) {
       res.redirect(302, `${redirectLocation.pathname}${redirectLocation.search}`)
     } else if (renderProps) {
-
       // route is found, prepare html string...
       const html = renderToString(<RouterContext {...renderProps} />)
 

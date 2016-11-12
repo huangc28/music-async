@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { createStore } from 'redux'
 import { Router, browserHistory } from 'react-router'
 import { Provider } from 'react-redux'
@@ -11,14 +11,14 @@ const store = createStore(rootReducer, initialState)
 
 // check if its hmr.
 if (module.hot) {
-	// accept itself.
-	module.hot.accept()
+  // accept itself.
+  module.hot.accept()
 }
 
 const App = () => (
-	<Provider store={store}>
-	  <Router routes={routes} history={browserHistory} />
-	</Provider>
+  <Provider store={store}>
+    <Router routes={routes} history={browserHistory} />
+  </Provider>
 )
 
 ReactDOM.render(
