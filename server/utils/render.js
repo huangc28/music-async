@@ -1,6 +1,6 @@
 import { resolve } from 'path'
 
-const staticify = require('staticify')(
+export const staticify = require('staticify')(
   resolve(__dirname, '../..', 'build')
 )
 

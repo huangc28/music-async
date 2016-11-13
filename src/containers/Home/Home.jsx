@@ -1,13 +1,16 @@
 import React, { Component } from 'react'
+import DropZone from '../../components/DropZone'
 import styles from './Home.css'
 
-const Home = () => (
-	<div className={styles.root}>
-		{/* Drop Zone */}
-		<div className={styles.dropZone}>
-			drop zone
-		</div>
-	</div>
-)
+class Home extends Component {
+	render () {
+		return (
+			<div className={styles.root}>
+				<DropZone />
+			</div>
+		)
+	}
+}
+
 
 export default Home
