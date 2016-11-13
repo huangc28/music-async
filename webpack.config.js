@@ -12,6 +12,7 @@ module.exports = env => {
   return {
     devtool: env.prod ? 'source-map' : 'eval-source-map',
     entry: removeEmpty([
+      'babel-polyfill', // to resolve redux saga error, github issue: https://github.com/yelouafi/redux-saga/issues/280
       resolve(__dirname, 'src/index.js'),
       ifDev('webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000'),
     ]),

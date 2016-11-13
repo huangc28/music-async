@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import styles from './DropZone.css'
+import { sayHello } from '../../actions/helloWorld'
 
 const getDropZoneStyle = enter => (
 	enter ? styles.objectIn : styles.dropZone
@@ -19,9 +21,9 @@ class DropZone extends Component {
   }
 
   onDragEnter (evt) {
+		// this.props.sayHello()
   	evt.preventDefault()
   	evt.stopPropagation()
-    // console.log('drop zone')
   	this.setState({
   		enter: true,
   	})
@@ -50,20 +52,14 @@ class DropZone extends Component {
     const dataItems = evt.dataTransfer || evt.dataTransferItemList
 
     if (dataItems.items) {
-      dataItems.items.foreach(item => {
-        console.log('kind', item.kind)
-      })
+			for (let i=0; i < dataItems.items.length; i++) {
+				if (dataItems.items[i].kind === 'file') {
+					console.log('kind', dataItems.items[i].getAsFile())
+					// console.log('data transfer object', dataItems.item[i])
+					// console.log('data transfer file', dataItems.item[i].getAsFile())
+				}
+			}
     }
-    // console.log(dataItems)
-    // console.log('data transfer object', dataItems.items)
-
-    // dataItems.items.forEach(item => {
-    //   console.log('kind', item.kind)
-    //   // if (item.kind)
-    // })
-
-    // Fire an action for uploading file to server.
-    // console.log(evt)
   }
 
   render () {
@@ -89,3 +85,9 @@ class DropZone extends Component {
 }
 
 export default DropZone
+
+// const mapStateToProps = () => ({})
+//
+// export default connect(mapStateToProps, {
+// 	sayHello,
+// })(DropZone)

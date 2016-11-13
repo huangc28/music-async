@@ -1,13 +1,28 @@
 import React from 'react'
-import { createStore } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
+import createSagaMiddleware from 'redux-saga'
 import { Router, browserHistory } from 'react-router'
 import { Provider } from 'react-redux'
 import ReactDOM from 'react-dom'
+import rootSaga from './sagas'
 import rootReducer from './reducers'
 import routes from './routes'
 
 const initialState = window.__INITIAL_STATE__
-const store = createStore(rootReducer, initialState)
+
+// create saga middleware
+const sagaMiddleware = createSagaMiddleware()
+
+const store = createStore(
+  rootReducer,
+  initialState,
+  applyMiddleware(sagaMiddleware)
+)
+
+console.log('redux store', store)
+
+// store.runSaga(rootSaga)
+sagaMiddleware.run(rootSaga)
 
 // check if its hmr.
 if (module.hot) {
