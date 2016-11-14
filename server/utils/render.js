@@ -21,6 +21,7 @@ export function renderFullPage (html, initialState) {
         <div id='app'><div>${html}</div></div>
         <script>
           window.__INITIAL_STATE__ = ${JSON.stringify(initialState)}
+          window.__CLIENT__ = true
         </script>
 
         <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>

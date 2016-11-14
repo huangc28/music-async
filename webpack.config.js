@@ -105,6 +105,9 @@ module.exports = env => {
           warnings: false,
         },
       })),
+      new webpack.DefinePlugin({
+        '__CLIENT__': true,
+      }),
       ifProd(
           new webpack.DefinePlugin({
           'process.env.NODE_ENV': '"production"',

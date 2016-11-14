@@ -2,12 +2,13 @@ import 'babel-polyfill'
 import express from 'express'
 import { resolve } from 'path'
 import React from 'react'
+import { Provider } from 'react-redux'
 import { renderToString } from 'react-dom/server'
 import { match, RouterContext } from 'react-router'
+import configureStore from '../src/store/configureStore'
 import routes from '../src/routes'
 import { renderFullPage, staticify } from './utils/render'
-import { createStore } from 'redux'
-import reducers from '../src/reducers'
+import rootReducer from '../src/reducers'
 import webpack from 'webpack'
 import webpackDevMiddleware from 'webpack-dev-middleware'
 import webpackHotMiddleware from 'webpack-hot-middleware'
@@ -50,17 +51,25 @@ function handleRender (req, res) {
     } else if (redirectLocation) {
       res.redirect(302, `${redirectLocation.pathname}${redirectLocation.search}`)
     } else if (renderProps) {
-      // route is found, prepare html string...
-      const html = renderToString(<RouterContext {...renderProps} />)
 
-      // prepare redux store
-      const store = createStore(reducers)
+      const initialState = {}
+
+      const store = configureStore(rootReducer, initialState)
+
+      // route is found, prepare html string...
+      const html = renderToString(
+        <Provider store={store}>
+          <RouterContext {...renderProps} />
+        </Provider>
+      )
 
       // get the initial state from redux store
-      const initialState = store.getState()
+      const finalizedState = store.getState()
+
+      console.log('finalizedState', finalizedState)
 
       // render full page along with html and redux store
-      res.send(renderFullPage(html, initialState))
+      res.send(renderFullPage(html, finalizedState))
     }
     // route is not found, send 404 not found page.
   })

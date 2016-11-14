@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import styles from './DropZone.css'
 import { sayHello } from '../../actions/helloWorld'
-
 const getDropZoneStyle = enter => (
 	enter ? styles.objectIn : styles.dropZone
 )
@@ -21,7 +20,7 @@ class DropZone extends Component {
   }
 
   onDragEnter (evt) {
-		// this.props.sayHello()
+		this.props.sayHello()
   	evt.preventDefault()
   	evt.stopPropagation()
   	this.setState({
@@ -84,10 +83,10 @@ class DropZone extends Component {
   }
 }
 
-export default DropZone
+// export default DropZone
 
-// const mapStateToProps = () => ({})
-//
-// export default connect(mapStateToProps, {
-// 	sayHello,
-// })(DropZone)
+const mapStateToProps = () => ({})
+
+export default connect(mapStateToProps, {
+	sayHello,
+})(DropZone)
